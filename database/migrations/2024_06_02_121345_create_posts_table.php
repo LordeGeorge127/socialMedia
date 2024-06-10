@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->longText('body')->nullable();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('group_id')->nullable()->constrained('groups');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.2024_06_02_121345_create_posts_table.php
      */
     public function down(): void
     {
